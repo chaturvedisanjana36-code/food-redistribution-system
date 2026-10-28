@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipient Dashboard | Food Redistribution System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+    <nav class="navbar container" aria-label="Recipient navigation">
+        <a class="logo" href="index.html">🌱 Food Redistribution System</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#available-donations">Find Food</a></li>
+            <li><a href="#my-requests">My Requests</a></li>
+            <li><a href="login.html">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="section">
+    <div class="container">
+        <div class="dashboard-heading">
+            <div>
+                <p class="eyebrow">NGO / RECIPIENT PORTAL</p>
+                <h1>Recipient Dashboard</h1>
+                <p>Find suitable food donations for your community.</p>
+            </div>
+            <span class="status status-pending">Demo Data</span>
+        </div>
+
+        <section class="dashboard-stats">
+            <article class="stat-card"><h2>12</h2><p>Available Listings</p></article>
+            <article class="stat-card"><h2>5</h2><p>My Requests</p></article>
+            <article class="stat-card"><h2>3</h2><p>Completed Pickups</p></article>
+        </section>
+
+        <section id="available-donations" class="dashboard-panel">
+            <h2>Available Food Donations</h2>
+
+            <div class="filter-bar">
+                <div class="form-group">
+                    <label for="foodSearch">Search by Food Name or Location</label>
+                    <input type="search" id="foodSearch"
+                           placeholder="e.g. rice, Lucknow">
+                </div>
+                <div class="form-group">
+                    <label for="foodFilter">Food Category</label>
+                    <select id="foodFilter">
+                        <option value="">All Categories</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="non-vegetarian">Non-Vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="bakery">Bakery</option>
+                        <option value="packaged">Packaged Food</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="donation-grid" id="donationListings">
+                <article class="donation-card"
+                         data-category="vegetarian"
+                         data-search="vegetable rice hazratganj lucknow restaurant">
+                    <span class="status status-available">Available</span>
+                    <h3>Vegetable Rice</h3>
+                    <p><strong>Donor:</strong> Green Leaf Restaurant</p>
+                    <p><strong>Quantity:</strong> 20 meals</p>
+                    <p><strong>Location:</strong> Hazratganj, Lucknow</p>
+                    <p><strong>Prepared:</strong> Sample: Today, 12:30 PM</p>
+                    <p><strong>Safe until:</strong> Sample: Today, 5:00 PM</p>
+                    <p><strong>Pickup by:</strong> Sample: Today, 4:00 PM</p>
+                    <p><strong>Storage:</strong> See donor's confirmed handling details.</p>
+                    <p><strong>Allergens:</strong> Confirm with donor before collection.</p>
+                    <form action="/pickup-requests" method="post">
+                        <input type="hidden" name="donation_id" value="101">
+                        <button type="submit" class="btn btn-primary">
+                            Request Pickup
+                        </button>
+                    </form>
+                </article>
+
+                <article class="donation-card"
+                         data-category="bakery"
+                         data-search="fresh bread buns gomti nagar lucknow bakery">
+                    <span class="status status-available">Available</span>
+                    <h3>Fresh Bread and Buns</h3>
+                    <p><strong>Donor:</strong> Sunrise Bakery</p>
+                    <p><strong>Quantity:</strong> 5 kg</p>
+                    <p><strong>Location:</strong> Gomti Nagar, Lucknow</p>
+                    <p><strong>Prepared:</strong> Sample: Today, 10:00 AM</p>
+                    <p><strong>Safe until:</strong> Sample: Today, 8:00 PM</p>
+                    <p><strong>Pickup by:</strong> Sample: Today, 6:00 PM</p>
+                    <p><strong>Storage:</strong> Confirm with donor.</p>
+                    <p><strong>Allergens:</strong> Check ingredients before distribution.</p>
+                    <form action="/pickup-requests" method="post">
+                        <input type="hidden" name="donation_id" value="102">
+                        <button type="submit" class="btn btn-primary">
+                            Request Pickup
+                        </button>
+                    </form>
+                </article>
+
+                <article class="donation-card"
+                         data-category="vegan"
+                         data-search="seasonal fruit packets aliganj lucknow store">
+                    <span class="status status-available">Available</span>
+                    <h3>Seasonal Fruit Packets</h3>
+                    <p><strong>Donor:</strong> Fresh Basket Store</p>
+                    <p><strong>Quantity:</strong> 12 packets</p>
+                    <p><strong>Location:</strong> Aliganj, Lucknow</p>
+                    <p><strong>Prepared:</strong> Sample: Today, 11:00 AM</p>
+                    <p><strong>Safe until:</strong> Sample: Tomorrow, 10:00 AM</p>
+                    <p><strong>Pickup by:</strong> Sample: Today, 7:00 PM</p>
+                    <p><strong>Storage:</strong> Confirm handling requirements.</p>
+                    <p><strong>Allergens:</strong> Check any relevant cross-contact information.</p>
+                    <form action="/pickup-requests" method="post">
+                        <input type="hidden" name="donation_id" value="103">
+                        <button type="submit" class="btn btn-primary">
+                            Request Pickup
+                        </button>
+                    </form>
+                </article>
+            </div>
+
+            <p id="noDonationsMessage" role="status" hidden>
+                No matching donations found.
+            </p>
+        </section>
+
+        <section class="dashboard-panel" id="my-requests">
+            <h2>My Pickup Requests</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Request ID</th>
+                            <th scope="col">Donation</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Pickup Details</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#501</td>
+                            <td>Vegetable Rice</td>
+                            <td>20 meals</td>
+                            <td>Confirm collection with donor</td>
+                            <td><span class="status status-requested">Requested</span></td>
+                        </tr>
+                        <tr>
+                            <td>#502</td>
+                            <td>Fresh Bread</td>
+                            <td>5 kg</td>
+                            <td>Confirm pickup time with donor</td>
+                            <td><span class="status status-accepted">Accepted</span></td>
+                        </tr>
+                        <tr>
+                            <td>#503</td>
+                            <td>Fruit Packets</td>
+                            <td>12 packets</td>
+                            <td>Sample collection completed</td>
+                            <td><span class="status status-completed">Completed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="form-note">
+                Pickup addresses and contact information should only be shown
+                to authorized participants after the request is accepted.
+            </p>
+        </section>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-content">
+        <p>Save Food. Share Hope. Sustain the Future.</p>
+        <a href="index.html">Back to Home</a>
+    </div>
+</footer>
+</body>
+</html>

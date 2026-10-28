@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Dashboard | Food Redistribution System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+    <nav class="navbar container" aria-label="Donor navigation">
+        <a class="logo" href="index.html">🌱 Food Redistribution System</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#list-food">List Food</a></li>
+            <li><a href="#my-donations">My Donations</a></li>
+            <li><a href="login.html">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="section">
+    <div class="container">
+        <div class="dashboard-heading">
+            <div>
+                <p class="eyebrow">DONOR PORTAL</p>
+                <h1>Donor Dashboard</h1>
+                <p>Give your surplus food a second purpose.</p>
+            </div>
+            <span class="status status-pending">Demo Data</span>
+        </div>
+
+        <div class="dashboard-stats">
+            <article class="stat-card"><h2>12</h2><p>Total Donations</p></article>
+            <article class="stat-card"><h2>8</h2><p>Completed</p></article>
+            <article class="stat-card"><h2>3</h2><p>Available</p></article>
+            <article class="stat-card"><h2>2</h2><p>Incoming Requests</p></article>
+        </div>
+
+        <section class="dashboard-panel" id="list-food">
+            <h2>List Surplus Food</h2>
+
+            <form id="donationForm" class="app-form"
+                  action="/donations" method="post">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="foodName">Food Name *</label>
+                        <input id="foodName" name="food_name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="foodCategory">Food Category *</label>
+                        <select id="foodCategory" name="food_category" required>
+                            <option value="">Choose category</option>
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="non-vegetarian">Non-Vegetarian</option>
+                            <option value="vegan">Vegan</option>
+                            <option value="bakery">Bakery</option>
+                            <option value="packaged">Packaged Food</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="foodQuantity">Quantity *</label>
+                        <input type="number" id="foodQuantity" name="quantity"
+                               min="0.1" step="any" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantityUnit">Unit *</label>
+                        <select id="quantityUnit" name="quantity_unit" required>
+                            <option value="meals">Meals</option>
+                            <option value="kg">Kilograms</option>
+                            <option value="packets">Packets</option>
+                            <option value="litres">Litres</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="preparedAt">Preparation Date & Time *</label>
+                        <input type="datetime-local" id="preparedAt"
+                               name="preparation_time" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="safeUntil">Safe-Consumption Deadline *</label>
+                        <input type="datetime-local" id="safeUntil"
+                               name="safe_consumption_deadline" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pickupDeadline">Pickup Deadline *</label>
+                        <input type="datetime-local" id="pickupDeadline"
+                               name="pickup_deadline" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="donorContact">Contact Number *</label>
+                        <input type="tel" id="donorContact" name="contact_phone"
+                               autocomplete="tel" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="pickupAddress">Pickup Address *</label>
+                        <textarea id="pickupAddress" name="pickup_address"
+                                  rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="storageConditions">Storage Conditions *</label>
+                        <textarea id="storageConditions" name="storage_conditions"
+                                  rows="2" required
+                                  placeholder="Describe refrigeration, temperature control, and storage arrangements"></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="allergenInfo">Ingredients and Allergen Information</label>
+                        <textarea id="allergenInfo" name="allergen_information"
+                                  rows="2"></textarea>
+                    </div>
+                </div>
+
+                <fieldset class="safety-checklist">
+                    <legend>Food Safety Confirmation *</legend>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="food_handled_safely"
+                               value="yes" required>
+                        Food has been handled and stored appropriately.
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="deadline_confirmed"
+                               value="yes" required>
+                        Preparation time and deadlines are accurate.
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="allergen_disclosure"
+                               value="yes" required>
+                        Known ingredients and allergen information have been disclosed.
+                    </label>
+                </fieldset>
+
+                <button type="submit" class="btn btn-primary">
+                    Publish Donation
+                </button>
+            </form>
+        </section>
+
+        <section class="dashboard-panel" id="my-donations">
+            <h2>My Donations</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Food</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Pickup Deadline</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Vegetable Rice</td>
+                            <td>20 meals</td>
+                            <td>Sample deadline</td>
+                            <td><span class="status status-available">Available</span></td>
+                        </tr>
+                        <tr>
+                            <td>Fresh Bread</td>
+                            <td>5 kg</td>
+                            <td>Sample deadline</td>
+                            <td><span class="status status-requested">Requested</span></td>
+                        </tr>
+                        <tr>
+                            <td>Lunch Meals</td>
+                            <td>15 meals</td>
+                            <td>Sample deadline</td>
+                            <td><span class="status status-completed">Completed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="dashboard-panel" id="incoming-requests">
+            <h2>Incoming NGO Requests</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">Donation</th>
+                            <th scope="col">NGO</th>
+                            <th scope="col">Requested Quantity</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fresh Bread</td>
+                            <td>Helping Hands NGO</td>
+                            <td>5 kg</td>
+                            <td><span class="status status-requested">Requested</span></td>
+                            <td>
+                                <form action="/pickup-requests/501/accept" method="post">
+                                    <button type="submit" class="btn btn-primary btn-small">
+                                        Accept
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Fruit Boxes</td>
+                            <td>Community Care Trust</td>
+                            <td>10 packets</td>
+                            <td><span class="status status-accepted">Accepted</span></td>
+                            <td>
+                                <span class="form-note">Awaiting collection</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-content">
+        <p>Save Food. Share Hope. Sustain the Future.</p>
+        <a href="index.html">Back to Home</a>
+    </div>
+</footer>
+</body>
+</html>

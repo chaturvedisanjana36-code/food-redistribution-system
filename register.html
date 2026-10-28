@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | Food Redistribution System</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .registration-page {
+            max-width: 760px;
+            margin: 40px auto;
+            padding: 24px;
+        }
+
+        .registration-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .role-selection {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 24px 0;
+        }
+
+        .role-selection button {
+            flex: 1;
+            min-width: 180px;
+            padding: 14px;
+            border: 1px solid #287a46;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #216b3b;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .role-selection button[aria-pressed="true"] {
+            background: #287a46;
+            color: #ffffff;
+        }
+
+        .registration-form {
+            display: grid;
+            gap: 8px;
+        }
+
+        .registration-form label {
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .registration-form input,
+        .registration-form select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+            font: inherit;
+        }
+
+        .registration-form button[type="submit"] {
+            margin-top: 20px;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #287a46;
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .registration-form button[type="submit"]:hover {
+            background: #1f6037;
+        }
+
+        .form-message {
+            margin-top: 12px;
+        }
+
+        .form-note {
+            color: #555555;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        @media (max-width: 600px) {
+            .registration-page {
+                margin: 16px auto;
+                padding: 12px;
+            }
+
+            .registration-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                Food Redistribution System
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="login.html">Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="registration-page">
+        <section class="registration-card">
+
+            <h1>Create an Account</h1>
+
+            <p>
+                Join us in reducing food waste and connecting surplus
+                food with organizations that need it.
+            </p>
+
+            <p class="form-note">
+                Demo mode: use sample information to test registration.
+                Do not enter real passwords or sensitive documents.
+            </p>
+
+            <!-- Role selection -->
+            <h2>Choose your role</h2>
+
+            <div class="role-selection">
+                <button
+                    type="button"
+                    data-register-role="donor"
+                    aria-pressed="false">
+                    Register as Donor
+                </button>
+
+                <button
+                    type="button"
+                    data-register-role="recipient"
+                    aria-pressed="false">
+                    Register as NGO / Recipient
+                </button>
+            </div>
+
+            <!-- Registration form -->
+            <section id="registrationFields" hidden>
+
+                <h2 id="registrationFormTitle">Registration</h2>
+
+                <form id="register-form" class="registration-form">
+
+                    <input
+                        type="hidden"
+                        id="registerRole"
+                        name="role"
+                        value="">
+
+                    <label for="fullName">Full Name</label>
+                    <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required>
+
+                    <label for="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="name@example.com"
+                        autocomplete="email"
+                        required>
+
+                    <label for="phone">Phone Number</label>
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="Enter phone number"
+                        autocomplete="tel"
+                        pattern="[0-9+\-\s()]{10,15}"
+                        title="Enter a valid phone number"
+                        required>
+
+                    <label for="location">City / Location</label>
+                    <input
+                        type="text"
+                        id="location"
+                        name="location"
+                        placeholder="e.g. Lucknow"
+                        autocomplete="address-level2"
+                        required>
+
+                    <label for="organizationName">
+                        Business / Organization Name
+                    </label>
+                    <input
+                        type="text"
+                        id="organizationName"
+                        name="organizationName"
+                        placeholder="e.g. Green Kitchen"
+                        required>
+
+                    <label
+                        for="organizationType"
+                        id="organizationTypeLabel">
+                        Business / Organization Type
+                    </label>
+                    <select id="organizationType" name="organizationType">
+    <option value="">Select organization type</option>
+    <option value="restaurant">Restaurant</option>
+    <option value="hotel">Hotel</option>
+    <option value="ngo">NGO</option>
+    <option value="food_bank">Food Bank</option>
+    <option value="individual">Individual</option>
+    <option value="other">Other</option>
+</select>
+                    <label for="password">Demo Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="At least 8 characters"
+                        minlength="8"
+                        autocomplete="new-password"
+                        required>
+
+                    <p class="form-note">
+                        This is a frontend demo. Real authentication
+                        and secure password handling must be implemented
+                        on the backend before production use.
+                    </p>
+
+                    <button type="submit">
+                        Create Demo Account
+                    </button>
+
+                    <p
+                        id="register-message"
+                        class="form-message"
+                        aria-live="polite">
+                    </p>
+
+                </form>
+            </section>
+
+            <p>
+                Already registered?
+                <a href="login.html">Login here</a>
+            </p>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            &copy; 2026 Food Redistribution System.
+            Reducing waste, sharing hope.
+        </p>
+    </footer>
+
+   <script src="register.js" defer></script>
+<script src="script.js" defer></script>
+
+<script>
+document.querySelectorAll("[data-register-role]").forEach(button => {
+    button.addEventListener("click", () => {
+        const role = button.dataset.registerRole;
+
+        document.getElementById("registrationFields").hidden = false;
+        document.getElementById("registerRole").value = role;
+
+        document.getElementById("registrationFormTitle").textContent =
+            role === "donor"
+                ? "Donor Registration"
+                : "NGO / Recipient Registration";
+
+        document.querySelectorAll("[data-register-role]").forEach(btn => {
+            btn.setAttribute("aria-pressed", String(btn === button));
+        });
+    });
+});
+</script>
+
+</body>
+</html>
